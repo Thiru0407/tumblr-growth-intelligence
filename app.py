@@ -1,6 +1,5 @@
 # ==============================
 # FINAL CLEAN PREMIUM app.py
-# Copy paste FULL file exactly
 # ==============================
 
 import streamlit as st
