@@ -4,121 +4,202 @@ import joblib
 from textblob import TextBlob
 import plotly.express as px
 import plotly.graph_objects as go
+
+# ---------------------------------------------------
+# PAGE CONFIG
+# ---------------------------------------------------
+st.set_page_config(
+    page_title="Tumblr Growth Intelligence",
+    page_icon="📈",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
+# ---------------------------------------------------
+# PREMIUM GLASSMORPHISM UI
+# ---------------------------------------------------
 st.markdown("""
 <style>
 
-/* App Background */
-.stApp{
-    background: linear-gradient(135deg,#06142b,#0d1b3f,#1c1240);
-    color:white;
+/* ---------- APP BACKGROUND ---------- */
+.stApp {
+    background:
+        radial-gradient(circle at top left, rgba(0, 183, 181, 0.35), transparent 34%),
+        radial-gradient(circle at bottom right, rgba(124, 58, 237, 0.32), transparent 36%),
+        linear-gradient(135deg, #020617 0%, #071426 48%, #1b1236 100%);
+    color: #e5faff;
 }
 
-/* Main container */
-.block-container{
-    padding-top:2rem;
-    padding-left:2rem;
-    padding-right:2rem;
+/* ---------- MAIN CONTAINER ---------- */
+.block-container {
+    padding-top: 2.2rem;
+    padding-bottom: 3rem;
+    padding-left: 2.4rem;
+    padding-right: 2.4rem;
     max-width: 1500px;
 }
 
-/* Sidebar */
-section[data-testid="stSidebar"]{
-    background: linear-gradient(180deg,#062c38,#0a4251);
-    border-right:1px solid rgba(255,255,255,.08);
+/* ---------- SIDEBAR ---------- */
+section[data-testid="stSidebar"] {
+    background: rgba(2, 6, 23, 0.86);
+    backdrop-filter: blur(18px);
+    border-right: 1px solid rgba(0, 183, 181, 0.25);
 }
 
-/* Main page headers */
-h1{
-    font-size:58px !important;
-    font-weight:900 !important;
-    color:#ffffff !important;
-    letter-spacing:-1px;
-    line-height:1.05;
-    margin-bottom:10px !important;
-    text-shadow:0 0 18px rgba(0,255,255,.12);
+section[data-testid="stSidebar"] * {
+    color: #e5faff !important;
 }
 
-/* Section headers */
-h2{
-    font-size:34px !important;
-    font-weight:800 !important;
-    color:#67e8f9 !important;
-    margin-top:28px !important;
-    margin-bottom:12px !important;
+section[data-testid="stSidebar"] h1 {
+    font-size: 26px !important;
+    line-height: 1.18 !important;
+    font-weight: 900 !important;
+    color: #ffffff !important;
+    text-shadow: 0 0 18px rgba(103, 232, 249, 0.25);
 }
 
-/* Sub headers */
-h3{
-    font-size:24px !important;
-    font-weight:700 !important;
-    color:#ffffff !important;
+section[data-testid="stSidebar"] .stRadio label {
+    font-size: 16px !important;
+    font-weight: 700 !important;
 }
 
-/* Text */
-p, li, div, label{
-    font-size:18px !important;
-    color:#eef7ff;
+/* ---------- PAGE TITLES ---------- */
+.page-title {
+    font-size: 64px !important;
+    font-weight: 950 !important;
+    color: #ffffff !important;
+    margin-top: 0 !important;
+    margin-bottom: 10px !important;
+    line-height: 1.03 !important;
+    letter-spacing: -1.4px !important;
+    text-shadow: 0 0 24px rgba(103, 232, 249, 0.22);
 }
 
-/* KPI Cards */
-[data-testid="metric-container"]{
-    background: rgba(255,255,255,.06);
-    border:1px solid rgba(0,255,255,.28);
-    border-radius:20px;
-    padding:22px;
-    box-shadow:0 0 18px rgba(0,255,255,.10);
+.page-subtitle {
+    font-size: 22px !important;
+    color: #cdefff !important;
+    margin-bottom: 30px !important;
+    line-height: 1.55 !important;
+    font-weight: 600 !important;
 }
 
-/* KPI Label */
-[data-testid="metric-container"] label{
-    font-size:16px !important;
-    color:#bdefff !important;
+/* ---------- HEADINGS ---------- */
+h1, h2, h3 {
+    color: #e5faff !important;
+    font-weight: 850 !important;
 }
 
-/* KPI Number */
-[data-testid="metric-container"] [data-testid="stMetricValue"]{
-    font-size:48px !important;
-    font-weight:900 !important;
-    color:white !important;
+h2 {
+    color: #67e8f9 !important;
+    font-size: 34px !important;
+    margin-top: 28px !important;
 }
 
-/* Buttons */
-.stButton>button{
-    background: linear-gradient(90deg,#00d4ff,#00ffa3);
-    color:#001018;
-    font-weight:800;
-    border:none;
-    border-radius:14px;
-    padding:.7rem 1.4rem;
-    box-shadow:0 0 18px rgba(0,255,255,.18);
+h3 {
+    color: #ffffff !important;
+    font-size: 24px !important;
 }
 
-.stButton>button:hover{
-    transform:translateY(-2px);
+p, li, label, span {
+    color: #d9faff !important;
+    font-size: 17px;
 }
 
-/* Inputs */
-textarea, input{
-    background:rgba(255,255,255,.06) !important;
-    color:white !important;
-    border-radius:12px !important;
+/* ---------- METRICS ---------- */
+div[data-testid="stMetric"] {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(0, 183, 181, 0.35);
+    border-radius: 22px;
+    padding: 24px 24px;
+    box-shadow: 0 0 25px rgba(0, 183, 181, 0.15);
+    backdrop-filter: blur(18px);
+    min-height: 142px;
 }
 
-/* Charts */
-.plotly-graph-div{
-    border-radius:18px;
-    overflow:hidden;
+div[data-testid="stMetricValue"] {
+    color: #dffcff !important;
+    font-size: 2.65rem !important;
+    font-weight: 950 !important;
+    line-height: 1.05 !important;
+}
+
+div[data-testid="stMetricLabel"] {
+    color: #c7f9ff !important;
+    font-weight: 800 !important;
+}
+
+/* ---------- ALERT / INFO BOXES ---------- */
+.stAlert {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(0,183,181,0.35);
+    border-radius: 18px;
+    backdrop-filter: blur(18px);
+}
+
+.stAlert * {
+    color: #d9faff !important;
+}
+
+/* ---------- BUTTONS ---------- */
+.stButton > button {
+    background: linear-gradient(90deg, #00b7b5, #7c3aed);
+    color: white !important;
+    border: none;
+    border-radius: 14px;
+    padding: 12px 26px;
+    font-size: 17px;
+    font-weight: 850;
+    box-shadow: 0 0 20px rgba(0,183,181,0.35);
+}
+
+.stButton > button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(124,58,237,0.45);
+}
+
+/* ---------- INPUTS ---------- */
+textarea, input {
+    background: rgba(255,255,255,0.10) !important;
+    color: #e5faff !important;
+    border-radius: 14px !important;
+}
+
+div[data-baseweb="input"], div[data-baseweb="textarea"] {
+    background: rgba(255,255,255,0.10) !important;
+    border-radius: 14px !important;
+}
+
+/* ---------- TABLES ---------- */
+div[data-testid="stDataFrame"] {
+    background: rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 12px;
+    border: 1px solid rgba(0,183,181,0.25);
+}
+
+/* ---------- PLOTLY CHARTS ---------- */
+.js-plotly-plot {
+    background: rgba(255,255,255,0.08) !important;
+    border-radius: 20px;
+    padding: 10px;
+    border: 1px solid rgba(0,183,181,0.25);
+    box-shadow: 0 0 24px rgba(0,183,181,0.10);
+}
+
+/* ---------- DIVIDER ---------- */
+hr {
+    border: none;
+    height: 1px;
+    background: rgba(255,255,255,0.18);
+    margin: 2.2rem 0;
 }
 
 </style>
 """, unsafe_allow_html=True)
-st.set_page_config(
-    page_title="Tumblr Growth Intelligence",
-    page_icon="📈",
-    layout="wide"
-)
 
-# ---------- LOAD ----------
+# ---------------------------------------------------
+# LOAD DATA + MODEL
+# ---------------------------------------------------
 @st.cache_data
 def load_data():
     return pd.read_csv("tumblr_features.csv")
@@ -130,112 +211,14 @@ def load_model():
 df = load_data()
 model = load_model()
 
-# ---------- GLASSMORPHISM UI ----------
-st.markdown("""
-<style>
-.stApp {
-    background:
-        radial-gradient(circle at top left, rgba(0,183,181,0.35), transparent 35%),
-        radial-gradient(circle at bottom right, rgba(124,58,237,0.30), transparent 35%),
-        linear-gradient(135deg, #020617 0%, #0f172a 50%, #111827 100%);
-    color: #e5faff;
-}
-
-section[data-testid="stSidebar"] {
-    background: rgba(2, 6, 23, 0.75);
-    backdrop-filter: blur(18px);
-    border-right: 1px solid rgba(0, 183, 181, 0.25);
-}
-
-section[data-testid="stSidebar"] * {
-    color: #e5faff !important;
-}
-
-.block-container {
-    padding-top: 2rem;
-    max-width: 1450px;
-}
-
-h1, h2, h3 {
-    color: #e5faff !important;
-    font-weight: 800 !important;
-}
-
-p, li, label, span {
-    color: #d9faff !important;
-    font-size: 17px;
-}
-
-div[data-testid="stMetric"] {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(0, 183, 181, 0.35);
-    border-radius: 22px;
-    padding: 22px;
-    box-shadow: 0 0 25px rgba(0, 183, 181, 0.15);
-    backdrop-filter: blur(18px);
-}
-
-div[data-testid="stMetricValue"] {
-    color: #67e8f9 !important;
-    font-size: 2.4rem !important;
-    font-weight: 900 !important;
-}
-
-div[data-testid="stMetricLabel"] {
-    color: #c7f9ff !important;
-}
-
-.stAlert {
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(0,183,181,0.35);
-    border-radius: 18px;
-    backdrop-filter: blur(18px);
-}
-
-.stButton > button {
-    background: linear-gradient(90deg, #00b7b5, #7c3aed);
-    color: white !important;
-    border: none;
-    border-radius: 14px;
-    padding: 12px 26px;
-    font-size: 17px;
-    font-weight: 800;
-    box-shadow: 0 0 20px rgba(0,183,181,0.35);
-}
-
-.stButton > button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 30px rgba(124,58,237,0.45);
-}
-
-textarea, input {
-    background: rgba(255,255,255,0.10) !important;
-    color: #e5faff !important;
-    border-radius: 14px !important;
-}
-
-div[data-testid="stDataFrame"] {
-    background: rgba(255,255,255,0.08);
-    border-radius: 20px;
-    padding: 12px;
-    border: 1px solid rgba(0,183,181,0.25);
-}
-
-.js-plotly-plot {
-    background: rgba(255,255,255,0.08) !important;
-    border-radius: 20px;
-    padding: 10px;
-    border: 1px solid rgba(0,183,181,0.25);
-    box-shadow: 0 0 24px rgba(0,183,181,0.10);
-}
-</style>
-""", unsafe_allow_html=True)
-
-# ---------- HELPERS ----------
+# ---------------------------------------------------
+# HELPERS
+# ---------------------------------------------------
 def split_tags(x):
     if pd.isna(x):
         return []
     return [i.strip() for i in str(x).replace(",", "|").split("|") if i.strip()]
+
 
 def create_features(text, tags, hour):
     blob = TextBlob(text)
@@ -250,21 +233,31 @@ def create_features(text, tags, hour):
         "subjectivity": blob.sentiment.subjectivity,
         "hour": hour,
         "is_weekend": 0,
-        "tags_text_ratio": tc/(wc+1)
+        "tags_text_ratio": tc / (wc + 1)
     }])
 
-def dark_chart(fig):
+
+def dark_chart(fig, height=450):
     fig.update_layout(
         template="plotly_dark",
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(0,0,0,0)",
-        font=dict(color="#e5faff"),
-        title_font=dict(color="#67e8f9", size=20),
-        height=450
+        font=dict(color="#e5faff", size=14),
+        title_font=dict(color="#67e8f9", size=21),
+        height=height,
+        margin=dict(l=50, r=35, t=70, b=55)
     )
     return fig
 
-# ---------- SIDEBAR ----------
+
+def page_header(title, subtitle):
+    st.markdown(f'<div class="page-title">{title}</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="page-subtitle">{subtitle}</div>', unsafe_allow_html=True)
+
+
+# ---------------------------------------------------
+# SIDEBAR
+# ---------------------------------------------------
 st.sidebar.title("Tumblr Growth Intelligence")
 st.sidebar.caption("Glassmorphism Creator Analytics Platform")
 
@@ -279,11 +272,14 @@ page = st.sidebar.radio(
     ]
 )
 
-# ---------- EXECUTIVE OVERVIEW ----------
+# ---------------------------------------------------
+# EXECUTIVE OVERVIEW
+# ---------------------------------------------------
 if page == "Executive Overview":
-
-    st.title("Tumblr Growth Intelligence Platform")
-    st.subheader("AI-powered analytics platform for Tumblr indie music creators.")
+    page_header(
+        "Tumblr Growth Intelligence Platform",
+        "AI-powered analytics platform for Tumblr indie music creators."
+    )
 
     st.info(
         "This platform helps creators understand engagement, improve captions, "
@@ -322,14 +318,17 @@ if page == "Executive Overview":
 - Business-focused consulting summary
 """)
 
-# ---------- DASHBOARD ----------
+# ---------------------------------------------------
+# ANALYTICS DASHBOARD
+# ---------------------------------------------------
 elif page == "Analytics Dashboard":
-
-    st.title("Analytics Dashboard")
-    st.caption("Meaningful insights explaining what drives Tumblr engagement.")
+    page_header(
+        "Analytics Dashboard",
+        "Meaningful insights explaining what drives Tumblr engagement."
+    )
 
     c1, c2, c3, c4, c5 = st.columns(5)
-    c1.metric("High Engagement Rate", f"{round(df['high_engagement'].mean()*100,1)}%")
+    c1.metric("High Engagement Rate", f"{round(df['high_engagement'].mean() * 100, 1)}%")
     c2.metric("Avg Words", round(df["word_count"].mean(), 0))
     c3.metric("Avg Tags", round(df["tag_count"].mean(), 0))
     c4.metric("Best Hour", f"{int(df.groupby('hour')['note_count'].mean().idxmax())}:00")
@@ -365,7 +364,7 @@ Creators should test top-performing hours first.
             labels=["0-3", "4-6", "7-10", "11-15", "16+"],
             include_lowest=True
         )
-        temp = df.groupby(tag_bucket)["high_engagement"].mean().reset_index()
+        temp = df.groupby(tag_bucket, observed=False)["high_engagement"].mean().reset_index()
         temp.columns = ["Tags Used", "High Engagement Rate"]
         temp["High Engagement Rate"] *= 100
 
@@ -396,7 +395,7 @@ Very high tag usage can work if highly relevant.
             labels=["0-25", "26-50", "51-100", "101-200", "200+"],
             include_lowest=True
         )
-        temp = df.groupby(caption_bucket)["high_engagement"].mean().reset_index()
+        temp = df.groupby(caption_bucket, observed=False)["high_engagement"].mean().reset_index()
         temp.columns = ["Caption Length", "High Engagement Rate"]
         temp["High Engagement Rate"] *= 100
 
@@ -440,12 +439,17 @@ Each bubble is a content style group.
 Bigger bubbles mean more posts.  
 Higher bubbles mean stronger average engagement.
 """)
+        else:
+            st.info("Content style clustering is unavailable because `cluster_label` is not present in the dataset.")
 
-# ---------- SIMULATOR ----------
+# ---------------------------------------------------
+# STRATEGIC POST SIMULATOR
+# ---------------------------------------------------
 elif page == "Strategic Post Simulator":
-
-    st.title("Strategic Post Simulator")
-    st.caption("Predict post performance before publishing and receive practical improvement tips.")
+    page_header(
+        "Strategic Post Simulator",
+        "Predict post performance before publishing and receive practical improvement tips."
+    )
 
     left, right = st.columns([1.2, 1])
 
@@ -511,7 +515,7 @@ It evaluates:
                     ]
                 }
             ))
-            st.plotly_chart(dark_chart(fig), use_container_width=True)
+            st.plotly_chart(dark_chart(fig, height=420), use_container_width=True)
 
             st.subheader("Recommendations")
             if len(caption.split()) < 50:
@@ -529,11 +533,14 @@ It evaluates:
             else:
                 st.write("- Posting hour aligns with stronger historical windows.")
 
-# ---------- PLAYBOOK ----------
+# ---------------------------------------------------
+# GROWTH PLAYBOOK
+# ---------------------------------------------------
 elif page == "Growth Playbook":
-
-    st.title("Growth Playbook")
-    st.caption("Practical, non-technical recommendations creators can directly follow.")
+    page_header(
+        "Growth Playbook",
+        "Practical, non-technical recommendations creators can directly follow."
+    )
 
     best_hour = int(df.groupby("hour")["note_count"].mean().idxmax())
     ideal_words = round(df[df["high_engagement"] == 1]["word_count"].mean(), 0)
@@ -600,10 +607,14 @@ elif page == "Growth Playbook":
 
     st.dataframe(playbook, use_container_width=True)
 
-# ---------- SUMMARY ----------
+# ---------------------------------------------------
+# CONSULTING SUMMARY
+# ---------------------------------------------------
 elif page == "Consulting Summary":
-
-    st.title("Consulting Summary")
+    page_header(
+        "Consulting Summary",
+        "Business-facing summary of platform value and impact."
+    )
 
     st.header("Project Overview")
     st.write(
@@ -652,4 +663,3 @@ elif page == "Consulting Summary":
 - More consistent audience growth  
 - Stronger creator confidence
 """)
-
