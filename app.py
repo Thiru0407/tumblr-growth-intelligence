@@ -11,142 +11,42 @@ st.set_page_config(
     page_icon="📈",
     layout="wide"
 )
-# ADD THIS BLOCK near the top of your code
-# (right after st.set_page_config(...))
-
 st.markdown("""
 <style>
 
-/* ---------------- MAIN APP ---------------- */
-.stApp {
-    background-color: #eef2f5;
-    color: #102a43;
-    font-family: 'Segoe UI', sans-serif;
-}
-
-/* ---------------- SIDEBAR ---------------- */
-section[data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #003b49 0%, #005f73 100%);
-    color: white;
-}
-
-section[data-testid="stSidebar"] * {
-    color: white !important;
-}
-
-section[data-testid="stSidebar"] .stRadio label {
-    font-size: 17px;
-    padding: 6px 0;
-}
-
-/* ---------------- TITLES ---------------- */
-h1 {
-    font-size: 3rem !important;
-    font-weight: 800 !important;
-    color: #0b2239 !important;
-    margin-bottom: 0.2rem !important;
-}
-
-h2 {
-    font-size: 2rem !important;
-    font-weight: 700 !important;
-    color: #12344d !important;
-    margin-top: 1rem !important;
-}
-
-h3 {
-    font-size: 1.4rem !important;
-    font-weight: 700 !important;
-    color: #12344d !important;
-}
-
-/* ---------------- PARAGRAPH ---------------- */
-p, li, label, div {
-    font-size: 17px;
-}
-
-/* ---------------- METRIC CARDS ---------------- */
-div[data-testid="metric-container"] {
+/* KPI CARD FULL FIX */
+div[data-testid="metric-container"]{
     background: white;
-    border-radius: 18px;
-    padding: 18px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-    border-left: 6px solid #00a6b2;
+    border-radius: 20px;
+    padding: 22px 18px !important;
+    min-height: 165px !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    border-top: 6px solid #00a6b2;
+    margin-bottom: 8px;
 }
 
-div[data-testid="metric-container"] label {
+div[data-testid="metric-container"] label{
     font-size: 15px !important;
+    font-weight: 600 !important;
     color: #486581 !important;
+    text-align: center !important;
+    margin-bottom: 8px !important;
 }
 
-div[data-testid="metric-container"] div[data-testid="stMetricValue"] {
-    font-size: 2.2rem !important;
-    font-weight: 800 !important;
+div[data-testid="stMetricValue"]{
+    font-size: 2.6rem !important;
+    font-weight: 900 !important;
     color: #003b49 !important;
+    text-align: center !important;
+    line-height: 1.1 !important;
 }
 
-/* ---------------- BUTTON ---------------- */
-.stButton > button {
-    background: linear-gradient(90deg, #008c99 0%, #00b4c6 100%);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    padding: 12px 24px;
-    font-size: 18px;
-    font-weight: 700;
-    transition: 0.3s ease;
-}
-
-.stButton > button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 18px rgba(0,0,0,0.15);
-}
-
-/* ---------------- INPUTS ---------------- */
-textarea, input {
-    border-radius: 12px !important;
-}
-
-div[data-baseweb="input"],
-div[data-baseweb="textarea"] {
-    background: white !important;
-    border-radius: 12px !important;
-}
-
-/* ---------------- INFO / SUCCESS BOXES ---------------- */
-.stAlert {
-    border-radius: 14px;
-    padding: 16px;
-}
-
-/* ---------------- DATAFRAME ---------------- */
-[data-testid="stDataFrame"] {
-    background: white;
-    border-radius: 18px;
-    padding: 10px;
-}
-
-/* ---------------- PLOTLY CHART WRAPPER ---------------- */
-.js-plotly-plot {
-    background: white !important;
-    border-radius: 18px;
-    padding: 10px;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
-}
-
-/* ---------------- SPACING ---------------- */
-.block-container {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-    max-width: 1450px;
-}
-
-/* ---------------- HORIZONTAL LINE ---------------- */
-hr {
-    border: none;
-    height: 1px;
-    background: #d9e2ec;
-    margin: 2rem 0;
+[data-testid="column"]{
+    padding: 0 6px !important;
 }
 
 </style>
