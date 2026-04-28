@@ -1,8 +1,7 @@
 # ==========================================================
-# FULL UPDATED app.py
-# Streamlit Cloud + VS Code SAME LOOK FIXED VERSION
-# Keeps your original design, pages, logic
-# Added deployment rendering fixes only
+# PREMIUM NATIVE STREAMLIT VERSION
+# Tumblr Growth Intelligence Platform
+# Works SAME on Local + Streamlit Cloud
 # ==========================================================
 
 import streamlit as st
@@ -12,18 +11,19 @@ from textblob import TextBlob
 import plotly.express as px
 import plotly.graph_objects as go
 
-# ==================================================
+# ==========================================================
 # CONFIG
-# ==================================================
+# ==========================================================
 st.set_page_config(
     page_title="Tumblr Growth Intelligence",
+    page_icon="🎵",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# ==================================================
-# LOAD
-# ==================================================
+# ==========================================================
+# LOAD DATA
+# ==========================================================
 @st.cache_data
 def load_data():
     return pd.read_csv("tumblr_features.csv")
@@ -35,148 +35,45 @@ def load_model():
 df = load_data()
 model = load_model()
 
-# ==================================================
-# GLOBAL CSS FIXED FOR STREAMLIT CLOUD
-# ==================================================
+# ==========================================================
+# STYLE
+# ==========================================================
 st.markdown("""
 <style>
-
-/* ---------- APP ---------- */
-html, body, [class*="css"]  {
-    font-family: 'Segoe UI', sans-serif;
-}
-
 .stApp{
     background:#eef2f5;
-    color:#003b46;
 }
 
-/* ---------- MAIN WIDTH ---------- */
-.block-container{
-    padding-top:2rem;
-    padding-bottom:2rem;
-    max-width:1400px;
-}
-
-/* ---------- SIDEBAR ---------- */
 section[data-testid="stSidebar"]{
     background:linear-gradient(180deg,#003b46,#005f6b,#008c9e);
 }
 
 section[data-testid="stSidebar"] *{
     color:white !important;
-    font-weight:600;
 }
 
-/* ---------- HERO ---------- */
-.hero{
-    background:linear-gradient(135deg,#003b46,#008c9e,#00b8c8);
-    padding:35px;
-    border-radius:22px;
-    color:white !important;
-    box-shadow:0 12px 25px rgba(0,0,0,.15);
+.block-container{
+    padding-top:2rem;
+    max-width:1400px;
 }
 
-.hero h1{
-    color:white !important;
-    font-size:54px;
-    font-weight:800;
-}
-
-.hero p{
-    color:white !important;
-    font-size:22px;
-    line-height:1.6;
-}
-
-/* ---------- CARD ---------- */
-.card{
+div[data-testid="stMetric"]{
     background:white;
-    padding:28px;
+    padding:18px;
     border-radius:18px;
-    box-shadow:0 10px 24px rgba(0,0,0,.08);
-    color:#003b46 !important;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
 }
 
-.card h1,.card h2,.card h3,.card p,.card li{
-    color:#003b46 !important;
-}
-
-/* ---------- KPI ---------- */
-.kpi{
-    background:linear-gradient(135deg,#003b46,#008c9e);
-    padding:22px;
-    border-radius:18px;
-    text-align:center;
-    color:white !important;
-    min-height:140px;
-}
-
-.kpi h1{
-    margin:0;
-    font-size:42px;
-    font-weight:800;
-    color:white !important;
-}
-
-.kpi p{
-    margin-top:8px;
-    font-size:18px;
-    color:white !important;
-}
-
-/* ---------- HEADINGS ---------- */
-.big{
-    font-size:54px;
-    font-weight:900;
-    color:#003b46 !important;
-}
-
-.sub{
-    color:#4d6570 !important;
-    font-size:24px;
-    margin-bottom:18px;
-}
-
-/* ---------- INPUTS ---------- */
-textarea, input{
-    color:#003b46 !important;
-    background:white !important;
-}
-
-label{
-    color:#003b46 !important;
-    font-weight:700 !important;
-}
-
-/* ---------- BUTTON ---------- */
-.stButton button{
-    background:#008c9e !important;
-    color:white !important;
-    border:none;
-    font-weight:800;
-    border-radius:10px;
-    padding:12px 24px;
-}
-
-/* ---------- PLOTLY ---------- */
-.js-plotly-plot{
-    background:white !important;
-    border-radius:14px;
-    padding:8px;
-}
-
-/* ---------- METRIC GAP ---------- */
-[data-testid="column"]{
-    padding:4px;
+h1,h2,h3{
+    color:#003b46;
 }
 
 </style>
 """, unsafe_allow_html=True)
 
-# ==================================================
+# ==========================================================
 # HELPERS
-# ==================================================
+# ==========================================================
 def split_tags(x):
     if pd.isna(x):
         return []
@@ -198,9 +95,9 @@ def create_features(text, tags, hour):
         "tags_text_ratio": tc/(wc+1)
     }])
 
-# ==================================================
+# ==========================================================
 # SIDEBAR
-# ==================================================
+# ==========================================================
 st.sidebar.title("Tumblr Growth Intelligence")
 
 page = st.sidebar.radio(
@@ -208,74 +105,75 @@ page = st.sidebar.radio(
     [
         "Executive Overview",
         "Analytics Dashboard",
-        "Graph Insights Guide",
         "Strategic Post Simulator",
         "Growth Playbook",
         "Consulting Summary"
     ]
 )
 
-# ==================================================
+# ==========================================================
 # EXECUTIVE OVERVIEW
-# ==================================================
+# ==========================================================
 if page == "Executive Overview":
 
-    st.markdown("""
-    <div class='hero'>
-    <h1>Tumblr Growth Intelligence Platform</h1>
-    <p>
-    AI-powered analytics platform helping indie music creators understand engagement,
-    improve captions, optimize posting strategy, and grow audience reach.
-    </p>
-    </div>
-    """, unsafe_allow_html=True)
+    st.title("Tumblr Growth Intelligence Platform")
+    st.caption("AI-powered analytics platform for Tumblr indie music creators.")
 
-    st.write("")
+    st.info("""
+This platform helps creators understand engagement, improve captions,
+optimize posting time, strengthen tag strategy, and grow audience reach.
+""")
 
     c1,c2,c3,c4 = st.columns(4)
 
-    vals = [
-        (len(df), "Posts Analyzed"),
-        (round(df["note_count"].mean(),2), "Avg Notes"),
-        (round(df["note_count"].max(),0), "Highest Notes"),
-        (str(int(df.groupby("hour")["note_count"].mean().idxmax())) + ":00", "Best Posting Hour")
-    ]
+    c1.metric("Posts Analyzed", f"{len(df):,}")
+    c2.metric("Average Notes", round(df["note_count"].mean(),2))
+    c3.metric("Highest Notes", int(df["note_count"].max()))
+    c4.metric("Best Posting Hour", f"{int(df.groupby('hour')['note_count'].mean().idxmax())}:00")
 
-    for col,v in zip([c1,c2,c3,c4], vals):
-        with col:
-            st.markdown(f"""
-            <div class='kpi'>
-            <h1>{v[0]}</h1>
-            <p>{v[1]}</p>
-            </div>
-            """, unsafe_allow_html=True)
+    st.write("")
 
-# ==================================================
-# DASHBOARD
-# ==================================================
+    a,b = st.columns(2)
+
+    with a:
+        st.subheader("Business Problem")
+        st.write("""
+Creators often publish music content without knowing:
+
+- Best time to post  
+- Ideal caption length  
+- How many tags to use  
+- What emotional tone works best  
+- How to grow consistently
+""")
+
+    with b:
+        st.subheader("Delivered Solution")
+        st.write("""
+This platform provides:
+
+- Historical analytics dashboard  
+- Engagement prediction engine  
+- Caption optimization simulator  
+- Growth playbook recommendations  
+- Business-focused consulting summary
+""")
+
+# ==========================================================
+# ANALYTICS DASHBOARD
+# ==========================================================
 elif page == "Analytics Dashboard":
 
-    st.markdown("<div class='big'>Analytics Dashboard</div>", unsafe_allow_html=True)
-    st.markdown("<div class='sub'>Meaningful graphs showing what really drives Tumblr engagement.</div>", unsafe_allow_html=True)
+    st.title("Analytics Dashboard")
+    st.caption("Meaningful insights explaining what drives Tumblr engagement.")
 
     c1,c2,c3,c4,c5 = st.columns(5)
 
-    vals = [
-        (f"{round(df['high_engagement'].mean()*100,1)}%","High Engagement Rate"),
-        (round(df["word_count"].mean(),0),"Avg Words"),
-        (round(df["tag_count"].mean(),0),"Avg Tags"),
-        (str(int(df.groupby("hour")["note_count"].mean().idxmax()))+":00","Best Hour"),
-        (round(df["polarity"].mean(),2),"Avg Sentiment")
-    ]
-
-    for col,v in zip([c1,c2,c3,c4,c5], vals):
-        with col:
-            st.markdown(f"""
-            <div class='kpi'>
-            <h1>{v[0]}</h1>
-            <p>{v[1]}</p>
-            </div>
-            """, unsafe_allow_html=True)
+    c1.metric("High Engagement Rate", f"{round(df['high_engagement'].mean()*100,1)}%")
+    c2.metric("Avg Words", round(df["word_count"].mean(),0))
+    c3.metric("Avg Tags", round(df["tag_count"].mean(),0))
+    c4.metric("Best Hour", f"{int(df.groupby('hour')['note_count'].mean().idxmax())}:00")
+    c5.metric("Avg Sentiment", round(df["polarity"].mean(),2))
 
     st.write("")
 
@@ -283,58 +181,92 @@ elif page == "Analytics Dashboard":
 
     with a:
         temp = df.groupby("hour")["note_count"].mean().reset_index()
-        fig = px.bar(temp,x="hour",y="note_count",
-                     title="Average Notes by Posting Hour",
-                     color="note_count",
-                     color_continuous_scale="Teal")
-        fig.update_layout(template="plotly_white",height=500)
+        fig = px.bar(
+            temp,x="hour",y="note_count",
+            title="Average Notes by Posting Hour",
+            color="note_count",
+            color_continuous_scale="Teal"
+        )
+        fig.update_layout(height=450)
         st.plotly_chart(fig,use_container_width=True)
 
     with b:
         temp = df.groupby("high_engagement")["word_count"].mean().reset_index()
         temp["Class"] = temp["high_engagement"].map({0:"Low",1:"High"})
-        fig = px.bar(temp,x="Class",y="word_count",
-                     title="Average Caption Length: Low vs High Success",
-                     color="Class",
-                     color_discrete_sequence=["#003b46","#00b8c8"])
-        fig.update_layout(template="plotly_white",height=500,showlegend=False)
+        fig = px.bar(
+            temp,x="Class",y="word_count",
+            title="Caption Length vs Success",
+            color="Class",
+            color_discrete_sequence=["#003b46","#00b8c8"]
+        )
+        fig.update_layout(showlegend=False,height=450)
         st.plotly_chart(fig,use_container_width=True)
 
-# ==================================================
-# GRAPH GUIDE
-# ==================================================
-elif page == "Graph Insights Guide":
+    c,d = st.columns(2)
 
-    st.markdown("<div class='big'>Graph Insights Guide</div>", unsafe_allow_html=True)
-    st.markdown("<div class='sub'>Simple explanation for non-technical audience.</div>", unsafe_allow_html=True)
+    with c:
+        temp = df.groupby("high_engagement")["tag_count"].mean().reset_index()
+        temp["Class"] = temp["high_engagement"].map({0:"Low",1:"High"})
+        fig = px.line(
+            temp,x="Class",y="tag_count",
+            markers=True,
+            title="Tags Used vs Success",
+            color_discrete_sequence=["#008c9e"]
+        )
+        fig.update_layout(height=450)
+        st.plotly_chart(fig,use_container_width=True)
 
-    st.markdown("""
-    <div class='card'>
-    <h2>What the charts mean</h2>
-    <p>
-    These graphs help creators understand:
-    best posting hour, ideal caption size,
-    tag strategy, and emotional writing style.
-    </p>
-    </div>
-    """, unsafe_allow_html=True)
+    with d:
+        temp = df.groupby("high_engagement")[["polarity","subjectivity"]].mean().reset_index()
+        temp["Class"] = temp["high_engagement"].map({0:"Low",1:"High"})
+        fig = px.bar(
+            temp,x="Class",y=["polarity","subjectivity"],
+            barmode="group",
+            title="Emotion Level in Successful Posts"
+        )
+        fig.update_layout(height=450)
+        st.plotly_chart(fig,use_container_width=True)
 
-# ==================================================
+# ==========================================================
 # SIMULATOR
-# ==================================================
+# ==========================================================
 elif page == "Strategic Post Simulator":
 
-    st.markdown("<div class='big'>Strategic Post Simulator</div>", unsafe_allow_html=True)
-    st.markdown("<div class='sub'>Predict performance before publishing.</div>", unsafe_allow_html=True)
+    st.title("Strategic Post Simulator")
+    st.caption("Predict post performance before publishing.")
 
-    text = st.text_area("Caption", height=220)
-    tags = st.text_input("Tags")
-    hour = st.slider("Posting Hour",0,23,19)
+    a,b = st.columns([1.2,1])
 
-    if st.button("Analyze Post"):
+    with a:
+        text = st.text_area("Caption", height=220)
+        tags = st.text_input("Tags")
+        hour = st.slider("Posting Hour",0,23,19)
+
+        run = st.button("Analyze Post")
+
+    with b:
+        st.subheader("How This Helps")
+        st.write("""
+This tool analyzes:
+
+- Caption length  
+- Number of tags  
+- Emotional tone  
+- Posting time  
+- Historical engagement patterns
+
+Then predicts engagement probability.
+""")
+
+    if run:
 
         X = create_features(text,tags,hour)
         prob = model.predict_proba(X)[0][1]
+
+        c1,c2,c3 = st.columns(3)
+        c1.metric("Success Probability", f"{prob:.0%}")
+        c2.metric("Words", len(text.split()))
+        c3.metric("Tags", len(split_tags(tags)))
 
         fig = go.Figure(go.Indicator(
             mode="gauge+number",
@@ -355,44 +287,50 @@ elif page == "Strategic Post Simulator":
         fig.update_layout(height=420)
         st.plotly_chart(fig,use_container_width=True)
 
-# ==================================================
+# ==========================================================
 # PLAYBOOK
-# ==================================================
+# ==========================================================
 elif page == "Growth Playbook":
 
-    st.markdown("<div class='big'>Growth Playbook</div>", unsafe_allow_html=True)
+    st.title("Growth Playbook")
+    st.caption("Practical actions creators should follow.")
 
     best_hour = int(df.groupby("hour")["note_count"].mean().idxmax())
 
-    st.markdown(f"""
-    <div class='card'>
-    <h2>Best Growth Tips</h2>
-    <p><b>Best Time to Post:</b> {best_hour}:00</p>
-    <p><b>Ideal Caption Style:</b> emotional + storytelling</p>
-    <p><b>Ideal Tag Count:</b> 8 to 10 tags</p>
-    <p><b>Consistency:</b> 3 to 5 posts weekly</p>
-    </div>
-    """, unsafe_allow_html=True)
+    st.subheader("Best Growth Tips")
 
-# ==================================================
+    st.write(f"""
+**Best Time to Post:** {best_hour}:00 based on dataset performance  
+
+**Ideal Caption Style:** Personal, emotional, storytelling captions perform better.  
+
+**Ideal Caption Length:** Around {round(df[df['high_engagement']==1]['word_count'].mean(),0)} words.  
+
+**Best Tag Count:** Use around {round(df[df['high_engagement']==1]['tag_count'].mean(),0)} tags.  
+
+**Suggested Tags:** indie music, new music, indie rock, shoegaze, bedroom pop.  
+
+**Growth Strategy:** Post consistently 3-5 times weekly and track results.
+""")
+
+# ==========================================================
 # SUMMARY
-# ==================================================
+# ==========================================================
 elif page == "Consulting Summary":
 
-    st.markdown("<div class='big'>Consulting Summary</div>", unsafe_allow_html=True)
+    st.title("Consulting Summary")
 
-    st.markdown("""
-    <div class='card'>
-    <h2>Client</h2>
-    <p>Tumblr Indie Music Community</p>
+    st.subheader("Client")
+    st.write("Tumblr Indie Music Community")
 
-    <h2>Problem</h2>
-    <p>Creators lacked visibility into what drives engagement.</p>
+    st.subheader("Problem")
+    st.write("Creators lacked visibility into what drives engagement.")
 
-    <h2>Solution</h2>
-    <p>Analytics dashboard + prediction engine + strategy system.</p>
+    st.subheader("Solution")
+    st.write("Analytics dashboard + prediction engine + strategy system.")
 
-    <h2>Business Value</h2>
-    <p>Better posts, stronger reach, repeatable audience growth.</p>
-    </div>
-    """, unsafe_allow_html=True)
+    st.subheader("Business Value")
+    st.write("Better posts, stronger reach, repeatable audience growth.")
+
+    st.subheader("Presentation Tip")
+    st.write("Use simulator live during presentation to impress professor.")
