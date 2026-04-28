@@ -5,9 +5,6 @@ from textblob import TextBlob
 import plotly.express as px
 import plotly.graph_objects as go
 
-# ---------------------------------------------------
-# PAGE CONFIG
-# ---------------------------------------------------
 st.set_page_config(
     page_title="Tumblr Growth Intelligence",
     page_icon="📈",
@@ -15,35 +12,30 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# ---------------------------------------------------
-# FINAL FUTURISTIC GLASS UI
-# ---------------------------------------------------
+# =========================
+# FINAL CLEAN PREMIUM UI
+# =========================
 st.markdown("""
 <style>
-
-/* ---------- APP BACKGROUND ---------- */
 .stApp {
     background:
-        radial-gradient(circle at top left, rgba(0, 183, 181, 0.28), transparent 32%),
-        radial-gradient(circle at bottom right, rgba(124, 58, 237, 0.28), transparent 35%),
-        linear-gradient(135deg, #020817 0%, #071426 46%, #171036 100%);
+        radial-gradient(circle at top left, rgba(0,183,181,0.22), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(124,58,237,0.25), transparent 34%),
+        linear-gradient(135deg, #020817 0%, #071426 50%, #171036 100%);
     color: #eafcff;
 }
 
-/* ---------- MAIN CONTAINER ---------- */
 .block-container {
     padding-top: 2rem;
-    padding-bottom: 3rem;
     padding-left: 2.2rem;
     padding-right: 2.2rem;
-    max-width: 1500px;
+    padding-bottom: 3rem;
+    max-width: 1450px;
 }
 
-/* ---------- SIDEBAR ---------- */
 section[data-testid="stSidebar"] {
-    background: rgba(2, 6, 23, 0.90);
-    backdrop-filter: blur(18px);
-    border-right: 1px solid rgba(0, 183, 181, 0.25);
+    background: rgba(2, 6, 23, 0.92);
+    border-right: 1px solid rgba(0, 183, 181, 0.22);
 }
 
 section[data-testid="stSidebar"] * {
@@ -52,189 +44,169 @@ section[data-testid="stSidebar"] * {
 
 section[data-testid="stSidebar"] h1 {
     font-size: 25px !important;
-    line-height: 1.15 !important;
-    font-weight: 900 !important;
-    color: #ffffff !important;
-    text-shadow: 0 0 18px rgba(103, 232, 249, 0.22);
-}
-
-section[data-testid="stSidebar"] .stRadio label {
-    font-size: 15.5px !important;
-    font-weight: 700 !important;
-}
-
-/* ---------- PAGE TITLES ---------- */
-.page-title {
-    font-size: 52px !important;
-    font-weight: 950 !important;
-    color: #ffffff !important;
-    margin-top: 0 !important;
-    margin-bottom: 8px !important;
-    line-height: 1.04 !important;
-    letter-spacing: -1px !important;
-    text-shadow: 0 0 22px rgba(103, 232, 249, 0.20);
-}
-
-.page-subtitle {
-    font-size: 19px !important;
-    color: #cdefff !important;
-    margin-bottom: 24px !important;
-    line-height: 1.5 !important;
-    font-weight: 600 !important;
-}
-
-/* ---------- GENERAL TYPOGRAPHY ---------- */
-h1, h2, h3 {
-    color: #e5faff !important;
+    line-height: 1.2 !important;
     font-weight: 850 !important;
 }
 
+.page-title {
+    font-size: 42px !important;
+    font-weight: 900 !important;
+    color: #ffffff !important;
+    line-height: 1.1 !important;
+    margin-bottom: 8px !important;
+    letter-spacing: -0.6px;
+}
+
+.page-subtitle {
+    font-size: 18px !important;
+    color: #bfefff !important;
+    margin-bottom: 26px !important;
+    line-height: 1.5;
+    font-weight: 500;
+}
+
+h1, h2, h3 {
+    color: #eafcff !important;
+}
+
 h2 {
+    font-size: 25px !important;
     color: #67e8f9 !important;
-    font-size: 27px !important;
-    margin-top: 18px !important;
 }
 
 h3 {
-    color: #ffffff !important;
-    font-size: 21px !important;
+    font-size: 20px !important;
 }
 
-p, li, label, span {
-    color: #d9faff !important;
-    font-size: 16px;
+p, li, label, span, div {
+    font-size: 15.8px;
     line-height: 1.55;
 }
 
-/* ---------- GLASS CARDS ---------- */
-.glass-card {
-    background: rgba(255, 255, 255, 0.075);
-    border: 1px solid rgba(0, 183, 181, 0.28);
-    border-radius: 22px;
-    padding: 24px 26px;
-    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.24), 0 0 22px rgba(0,183,181,0.08);
-    backdrop-filter: blur(18px);
+div[data-testid="stMetric"] {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(0,183,181,0.32);
+    border-radius: 18px;
+    padding: 18px 20px;
+    min-height: 120px;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.22);
+}
+
+div[data-testid="stMetricValue"] {
+    color: #ffffff !important;
+    font-size: 2.15rem !important;
+    font-weight: 900 !important;
+}
+
+div[data-testid="stMetricLabel"] {
+    color: #c7f9ff !important;
+    font-weight: 700 !important;
+}
+
+.info-card {
+    background: rgba(255,255,255,0.075);
+    border: 1px solid rgba(0,183,181,0.25);
+    border-radius: 18px;
+    padding: 22px 24px;
     margin-bottom: 18px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.22);
 }
 
-.glass-card h2, .glass-card h3 {
-    margin-top: 0 !important;
+.info-card h2 {
+    margin-top: 0;
+    color: #67e8f9 !important;
+    font-size: 24px !important;
 }
 
-.glass-card p, .glass-card li {
+.info-card h3 {
+    color: #ffffff !important;
+    font-size: 19px !important;
+}
+
+.info-card p, .info-card li {
     color: #e3fbff !important;
-    font-size: 16px !important;
+    font-size: 15.8px !important;
 }
 
 .insight-card {
-    background: rgba(103, 232, 249, 0.12);
+    background: rgba(103,232,249,0.12);
     border-left: 5px solid #67e8f9;
-    border-radius: 18px;
-    padding: 18px 22px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.20);
-    margin-top: 12px;
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-top: 10px;
     margin-bottom: 18px;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.20);
+    color: #eafcff !important;
 }
 
 .insight-card b {
     color: #ffffff !important;
 }
 
-/* ---------- METRICS ---------- */
-div[data-testid="stMetric"] {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(0, 183, 181, 0.35);
-    border-radius: 22px;
-    padding: 22px 22px;
-    box-shadow: 0 0 25px rgba(0, 183, 181, 0.13);
-    backdrop-filter: blur(18px);
-    min-height: 132px;
-}
-
-div[data-testid="stMetricValue"] {
-    color: #dffcff !important;
-    font-size: 2.35rem !important;
-    font-weight: 950 !important;
-    line-height: 1.05 !important;
-}
-
-div[data-testid="stMetricLabel"] {
-    color: #c7f9ff !important;
-    font-weight: 800 !important;
-}
-
-/* ---------- ALERT / INFO BOXES ---------- */
 .stAlert {
     background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(0,183,181,0.35);
-    border-radius: 18px;
-    backdrop-filter: blur(18px);
+    border: 1px solid rgba(0,183,181,0.28);
+    border-radius: 16px;
 }
 
 .stAlert * {
-    color: #d9faff !important;
+    color: #eafcff !important;
 }
 
-/* ---------- BUTTONS ---------- */
 .stButton > button {
     background: linear-gradient(90deg, #00b7b5, #7c3aed);
     color: white !important;
     border: none;
-    border-radius: 14px;
-    padding: 11px 25px;
-    font-size: 16px;
-    font-weight: 850;
-    box-shadow: 0 0 20px rgba(0,183,181,0.32);
+    border-radius: 13px;
+    padding: 10px 24px;
+    font-size: 15.5px;
+    font-weight: 800;
+    box-shadow: 0 0 18px rgba(0,183,181,0.28);
 }
 
 .stButton > button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 0 30px rgba(124,58,237,0.45);
+    box-shadow: 0 0 26px rgba(124,58,237,0.38);
 }
 
-/* ---------- INPUTS ---------- */
 textarea, input {
     background: rgba(255,255,255,0.10) !important;
     color: #e5faff !important;
-    border-radius: 14px !important;
+    border-radius: 13px !important;
 }
 
 div[data-baseweb="input"], div[data-baseweb="textarea"] {
     background: rgba(255,255,255,0.10) !important;
-    border-radius: 14px !important;
+    border-radius: 13px !important;
 }
 
-/* ---------- TABLES ---------- */
+.js-plotly-plot {
+    background: rgba(255,255,255,0.07) !important;
+    border-radius: 18px;
+    padding: 8px;
+    border: 1px solid rgba(0,183,181,0.22);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.20);
+}
+
 div[data-testid="stDataFrame"] {
     background: rgba(255,255,255,0.08);
-    border-radius: 20px;
-    padding: 12px;
-    border: 1px solid rgba(0,183,181,0.25);
-}
-
-/* ---------- PLOTLY CHARTS ---------- */
-.js-plotly-plot {
-    background: rgba(255,255,255,0.075) !important;
-    border-radius: 20px;
+    border-radius: 18px;
     padding: 10px;
     border: 1px solid rgba(0,183,181,0.25);
-    box-shadow: 0 0 24px rgba(0,183,181,0.10);
 }
 
-/* ---------- DIVIDER ---------- */
 hr {
     border: none;
     height: 1px;
-    background: rgba(255,255,255,0.16);
-    margin: 2rem 0;
+    background: rgba(255,255,255,0.14);
+    margin: 1.8rem 0;
 }
-
 </style>
 """, unsafe_allow_html=True)
 
-# ---------------------------------------------------
+# =========================
 # LOAD DATA + MODEL
-# ---------------------------------------------------
+# =========================
 @st.cache_data
 def load_data():
     return pd.read_csv("tumblr_features.csv")
@@ -246,14 +218,13 @@ def load_model():
 df = load_data()
 model = load_model()
 
-# ---------------------------------------------------
+# =========================
 # HELPERS
-# ---------------------------------------------------
+# =========================
 def split_tags(x):
     if pd.isna(x):
         return []
     return [i.strip() for i in str(x).replace(",", "|").split("|") if i.strip()]
-
 
 def create_features(text, tags, hour):
     blob = TextBlob(text)
@@ -271,39 +242,46 @@ def create_features(text, tags, hour):
         "tags_text_ratio": tc / (wc + 1)
     }])
 
-
-def dark_chart(fig, height=450):
+def dark_chart(fig, height=430):
     fig.update_layout(
         template="plotly_dark",
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(0,0,0,0)",
         font=dict(color="#e5faff", size=13),
-        title_font=dict(color="#67e8f9", size=20),
+        title_font=dict(color="#67e8f9", size=19),
         height=height,
-        margin=dict(l=50, r=35, t=70, b=55)
+        margin=dict(l=48, r=35, t=65, b=50)
     )
     return fig
-
 
 def page_header(title, subtitle):
     st.markdown(f'<div class="page-title">{title}</div>', unsafe_allow_html=True)
     st.markdown(f'<div class="page-subtitle">{subtitle}</div>', unsafe_allow_html=True)
 
+def info_card(title, html_body):
+    st.markdown(
+        f"""
+        <div class="info-card">
+            <h2>{title}</h2>
+            {html_body}
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
-def glass_start():
-    st.markdown('<div class="glass-card">', unsafe_allow_html=True)
+def insight_card(html_body):
+    st.markdown(
+        f"""
+        <div class="insight-card">
+            {html_body}
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
-
-def glass_end():
-    st.markdown('</div>', unsafe_allow_html=True)
-
-
-def insight(text):
-    st.markdown(f'<div class="insight-card">{text}</div>', unsafe_allow_html=True)
-
-# ---------------------------------------------------
+# =========================
 # SIDEBAR
-# ---------------------------------------------------
+# =========================
 st.sidebar.title("Tumblr Growth Intelligence")
 st.sidebar.caption("Glassmorphism Creator Analytics Platform")
 
@@ -318,9 +296,9 @@ page = st.sidebar.radio(
     ]
 )
 
-# ---------------------------------------------------
+# =========================
 # EXECUTIVE OVERVIEW
-# ---------------------------------------------------
+# =========================
 if page == "Executive Overview":
     page_header(
         "Tumblr Growth Intelligence Platform",
@@ -343,34 +321,38 @@ if page == "Executive Overview":
     col1, col2 = st.columns(2)
 
     with col1:
-        glass_start()
-        st.header("Business Problem")
-        st.write("Creators often publish music content without knowing:")
-        st.markdown("""
-- Best time to post  
-- Ideal caption length  
-- How many tags to use  
-- What emotional tone works best  
-- How to grow consistently
-""")
-        glass_end()
+        info_card(
+            "Business Problem",
+            """
+            <p>Creators often publish music content without knowing:</p>
+            <ul>
+                <li>Best time to post</li>
+                <li>Ideal caption length</li>
+                <li>How many tags to use</li>
+                <li>What emotional tone works best</li>
+                <li>How to grow consistently</li>
+            </ul>
+            """
+        )
 
     with col2:
-        glass_start()
-        st.header("Delivered Solution")
-        st.write("This platform provides:")
-        st.markdown("""
-- Historical analytics dashboard  
-- Engagement prediction engine  
-- Caption optimization simulator  
-- Growth playbook recommendations  
-- Business-focused consulting summary
-""")
-        glass_end()
+        info_card(
+            "Delivered Solution",
+            """
+            <p>This platform provides:</p>
+            <ul>
+                <li>Historical analytics dashboard</li>
+                <li>Engagement prediction engine</li>
+                <li>Caption optimization simulator</li>
+                <li>Growth playbook recommendations</li>
+                <li>Business-focused consulting summary</li>
+            </ul>
+            """
+        )
 
-# ---------------------------------------------------
+# =========================
 # ANALYTICS DASHBOARD
-# ---------------------------------------------------
+# =========================
 elif page == "Analytics Dashboard":
     page_header(
         "Analytics Dashboard",
@@ -400,12 +382,12 @@ elif page == "Analytics Dashboard":
         )
         st.plotly_chart(dark_chart(fig), use_container_width=True)
 
-        insight("""
-<b>What this tells us:</b><br>
-This graph shows the average number of notes by posting hour.<br>
-The taller the bar, the stronger that hour performed historically.<br>
-Creators should test top-performing hours first.
-""")
+        insight_card("""
+        <b>What this tells us:</b><br>
+        This graph shows the average number of notes by posting hour.<br>
+        The taller the bar, the stronger that hour performed historically.<br>
+        Creators should test top-performing hours first.
+        """)
 
     with b:
         tag_bucket = pd.cut(
@@ -426,15 +408,15 @@ Creators should test top-performing hours first.
             title="How Many Tags Should Creators Use?",
             color_discrete_sequence=["#67e8f9"]
         )
-        fig.update_traces(line=dict(width=5), marker=dict(size=12))
+        fig.update_traces(line=dict(width=5), marker=dict(size=11))
         st.plotly_chart(dark_chart(fig), use_container_width=True)
 
-        insight("""
-<b>What this tells us:</b><br>
-Posts with too few tags underperform.<br>
-Balanced tag usage increases discoverability.<br>
-Very high tag usage can work if highly relevant.
-""")
+        insight_card("""
+        <b>What this tells us:</b><br>
+        Posts with too few tags underperform.<br>
+        Balanced tag usage increases discoverability.<br>
+        Very high tag usage can work if highly relevant.
+        """)
 
     c, d = st.columns(2)
 
@@ -458,12 +440,12 @@ Very high tag usage can work if highly relevant.
         )
         st.plotly_chart(dark_chart(fig), use_container_width=True)
 
-        insight("""
-<b>What this tells us:</b><br>
-Medium-length captions tend to perform strongest.<br>
-Too short feels empty.<br>
-Too long may reduce reading completion.
-""")
+        insight_card("""
+        <b>What this tells us:</b><br>
+        Medium-length captions tend to perform strongest.<br>
+        Too short feels empty.<br>
+        Too long may reduce reading completion.
+        """)
 
     with d:
         if "cluster_label" in df.columns:
@@ -483,18 +465,18 @@ Too long may reduce reading completion.
             )
             st.plotly_chart(dark_chart(fig), use_container_width=True)
 
-            insight("""
-<b>What this tells us:</b><br>
-Each bubble is a content style group.<br>
-Bigger bubbles mean more posts.<br>
-Higher bubbles mean stronger average engagement.
-""")
+            insight_card("""
+            <b>What this tells us:</b><br>
+            Each bubble is a content style group.<br>
+            Bigger bubbles mean more posts.<br>
+            Higher bubbles mean stronger average engagement.
+            """)
         else:
             st.info("Content style clustering is unavailable because `cluster_label` is not present in the dataset.")
 
-# ---------------------------------------------------
+# =========================
 # STRATEGIC POST SIMULATOR
-# ---------------------------------------------------
+# =========================
 elif page == "Strategic Post Simulator":
     page_header(
         "Strategic Post Simulator",
@@ -520,25 +502,23 @@ elif page == "Strategic Post Simulator":
         run = st.button("Analyze Post")
 
     with right:
-        glass_start()
-        st.subheader("How the Simulator Works")
-        st.write("The simulator estimates whether a Tumblr post has high engagement potential.")
-        st.markdown("""
-It evaluates:
-
-- Caption length  
-- Word count  
-- Number of tags  
-- Sentiment polarity  
-- Subjectivity / personal tone  
-- Posting hour  
-- Tag-to-text balance
-""")
-        st.write(
-            "The output is not a guarantee of virality. "
-            "It is a decision-support score based on historical posting patterns."
+        info_card(
+            "How the Simulator Works",
+            """
+            <p>The simulator estimates whether a Tumblr post has high engagement potential.</p>
+            <p><b>It evaluates:</b></p>
+            <ul>
+                <li>Caption length</li>
+                <li>Word count</li>
+                <li>Number of tags</li>
+                <li>Sentiment polarity</li>
+                <li>Subjectivity / personal tone</li>
+                <li>Posting hour</li>
+                <li>Tag-to-text balance</li>
+            </ul>
+            <p>The output is not a guarantee of virality. It is a decision-support score based on historical posting patterns.</p>
+            """
         )
-        glass_end()
 
     if run:
         if caption.strip() == "":
@@ -569,27 +549,30 @@ It evaluates:
             ))
             st.plotly_chart(dark_chart(fig, height=420), use_container_width=True)
 
-            glass_start()
-            st.subheader("Recommendations")
+            tips = []
             if len(caption.split()) < 50:
-                st.write("- Add more storytelling or emotional context.")
+                tips.append("Add more storytelling or emotional context.")
             else:
-                st.write("- Caption depth is strong.")
+                tips.append("Caption depth is strong.")
 
             if len(split_tags(tags)) < 5:
-                st.write("- Add more relevant tags. Try 5–15 focused tags.")
+                tips.append("Add more relevant tags. Try 5–15 focused tags.")
             else:
-                st.write("- Tag count is healthy.")
+                tips.append("Tag count is healthy.")
 
             if hour not in [3, 11, 13, 14, 23]:
-                st.write("- Test stronger posting windows such as 3:00, 11:00, 13:00, 14:00, or 23:00.")
+                tips.append("Test stronger posting windows such as 3:00, 11:00, 13:00, 14:00, or 23:00.")
             else:
-                st.write("- Posting hour aligns with stronger historical windows.")
-            glass_end()
+                tips.append("Posting hour aligns with stronger historical windows.")
 
-# ---------------------------------------------------
+            info_card(
+                "Recommendations",
+                "<ul>" + "".join([f"<li>{tip}</li>" for tip in tips]) + "</ul>"
+            )
+
+# =========================
 # GROWTH PLAYBOOK
-# ---------------------------------------------------
+# =========================
 elif page == "Growth Playbook":
     page_header(
         "Growth Playbook",
@@ -600,46 +583,28 @@ elif page == "Growth Playbook":
     ideal_words = round(df[df["high_engagement"] == 1]["word_count"].mean(), 0)
     ideal_tags = round(df[df["high_engagement"] == 1]["tag_count"].mean(), 0)
 
-    glass_start()
-    st.header("Recommended Creator Strategy")
+    info_card(
+        "Recommended Creator Strategy",
+        f"""
+        <h3>1. Caption Strategy</h3>
+        <p>Do not only post a link. Add a short emotional reaction, story, or reason why the song matters.</p>
+        <p><b>Example caption:</b></p>
+        <p>This track feels like walking home at midnight after a long week. The vocals are soft, the guitar is dreamy, and I keep replaying it.</p>
 
-    st.subheader("1. Caption Strategy")
-    st.write(
-        "Do not only post a link. Add a short emotional reaction, story, "
-        "or reason why the song matters."
-    )
+        <h3>2. Tag Strategy</h3>
+        <p>Use around {ideal_tags} tags. Mix broad discovery tags with niche music tags.</p>
+        <p><b>Suggested tags:</b> indie music, new music, indie rock, bedroom pop, shoegaze, sad songs, playlist, recommendation</p>
 
-    st.write("**Example caption:**")
-    st.write(
-        "This track feels like walking home at midnight after a long week. "
-        "The vocals are soft, the guitar is dreamy, and I keep replaying it."
-    )
+        <h3>3. Best Posting Time</h3>
+        <p>The strongest posting hour in this dataset is {best_hour}:00. Test this first, then compare with evening windows.</p>
 
-    st.subheader("2. Tag Strategy")
-    st.write(f"Use around {ideal_tags} tags. Mix broad discovery tags with niche music tags.")
-    st.write(
-        "**Suggested tags:** indie music, new music, indie rock, "
-        "bedroom pop, shoegaze, sad songs, playlist, recommendation"
-    )
+        <h3>4. Ideal Caption Length</h3>
+        <p>High-performing posts average around {ideal_words} words. Avoid captions that are too empty or generic.</p>
 
-    st.subheader("3. Best Posting Time")
-    st.write(
-        f"The strongest posting hour in this dataset is {best_hour}:00. "
-        "Test this first, then compare with evening windows."
+        <h3>5. Weekly Growth Routine</h3>
+        <p>Post 3–5 times per week, track notes, compare tags, test different hours, and reuse formats that perform well.</p>
+        """
     )
-
-    st.subheader("4. Ideal Caption Length")
-    st.write(
-        f"High-performing posts average around {ideal_words} words. "
-        "Avoid captions that are too empty or generic."
-    )
-
-    st.subheader("5. Weekly Growth Routine")
-    st.write(
-        "Post 3–5 times per week, track notes, compare tags, "
-        "test different hours, and reuse formats that perform well."
-    )
-    glass_end()
 
     playbook = pd.DataFrame({
         "Growth Lever": ["Caption", "Tags", "Timing", "Emotion", "Consistency"],
@@ -661,61 +626,65 @@ elif page == "Growth Playbook":
 
     st.dataframe(playbook, use_container_width=True)
 
-# ---------------------------------------------------
+# =========================
 # CONSULTING SUMMARY
-# ---------------------------------------------------
+# =========================
 elif page == "Consulting Summary":
     page_header(
         "Consulting Summary",
         "Business-facing summary of platform value and impact."
     )
 
-    glass_start()
-    st.header("Project Overview")
-    st.write(
-        "This project follows Track 2: User / Influencer / Brand-Facing Analytics. "
-        "The selected client context is the Tumblr indie music creator community."
+    info_card(
+        "Project Overview",
+        """
+        <p>This project follows Track 2: User / Influencer / Brand-Facing Analytics. The selected client context is the Tumblr indie music creator community.</p>
+        <p>The final solution is a creator-facing intelligence platform helping users improve traffic, engagement, and audience development.</p>
+        """
     )
 
-    st.write(
-        "The final solution is a creator-facing intelligence platform helping users improve traffic, "
-        "engagement, and audience development."
+    info_card(
+        "Business Problem",
+        """
+        <p>Tumblr creators produce highly creative content, but often lack analytics tools to understand why some posts receive more notes than others.</p>
+        <p>This makes content planning difficult. Creators may not know whether captions, tags, emotional tone, or posting hours are helping growth.</p>
+        """
     )
 
-    st.header("Business Problem")
-    st.write(
-        "Tumblr creators produce highly creative content, but often lack analytics tools "
-        "to understand why some posts receive more notes than others."
+    info_card(
+        "Solution Delivered",
+        """
+        <ul>
+            <li>Analytics Dashboard: explains historical engagement patterns</li>
+            <li>Strategic Post Simulator: predicts engagement potential</li>
+            <li>Growth Playbook: converts insights into practical actions</li>
+            <li>Consulting Summary: links technical work to business value</li>
+        </ul>
+        """
     )
 
-    st.write(
-        "This makes content planning difficult. Creators may not know whether captions, "
-        "tags, emotional tone, or posting hours are helping growth."
+    info_card(
+        "Technical Methods Used",
+        """
+        <ul>
+            <li>Feature engineering from captions, tags, and posting time</li>
+            <li>Exploratory data analysis</li>
+            <li>Classification logic for engagement scoring</li>
+            <li>Visual dashboards with Plotly</li>
+            <li>Recommendation framework for creator decisions</li>
+        </ul>
+        """
     )
 
-    st.header("Solution Delivered")
-    st.markdown("""
-- Analytics Dashboard: explains historical engagement patterns  
-- Strategic Post Simulator: predicts engagement potential  
-- Growth Playbook: converts insights into practical actions  
-- Consulting Summary: links technical work to business value
-""")
-
-    st.header("Technical Methods Used")
-    st.markdown("""
-- Feature engineering from captions, tags, and posting time  
-- Exploratory data analysis  
-- Classification logic for engagement scoring  
-- Visual dashboards with Plotly  
-- Recommendation framework for creator decisions
-""")
-
-    st.header("Business Value Created")
-    st.markdown("""
-- Better content decisions  
-- Faster learning cycles  
-- Improved discoverability  
-- More consistent audience growth  
-- Stronger creator confidence
-""")
-    glass_end()
+    info_card(
+        "Business Value Created",
+        """
+        <ul>
+            <li>Better content decisions</li>
+            <li>Faster learning cycles</li>
+            <li>Improved discoverability</li>
+            <li>More consistent audience growth</li>
+            <li>Stronger creator confidence</li>
+        </ul>
+        """
+    )
