@@ -4,7 +4,114 @@ import joblib
 from textblob import TextBlob
 import plotly.express as px
 import plotly.graph_objects as go
+st.markdown("""
+<style>
 
+/* App Background */
+.stApp{
+    background: linear-gradient(135deg,#06142b,#0d1b3f,#1c1240);
+    color:white;
+}
+
+/* Main container */
+.block-container{
+    padding-top:2rem;
+    padding-left:2rem;
+    padding-right:2rem;
+    max-width: 1500px;
+}
+
+/* Sidebar */
+section[data-testid="stSidebar"]{
+    background: linear-gradient(180deg,#062c38,#0a4251);
+    border-right:1px solid rgba(255,255,255,.08);
+}
+
+/* Main page headers */
+h1{
+    font-size:58px !important;
+    font-weight:900 !important;
+    color:#ffffff !important;
+    letter-spacing:-1px;
+    line-height:1.05;
+    margin-bottom:10px !important;
+    text-shadow:0 0 18px rgba(0,255,255,.12);
+}
+
+/* Section headers */
+h2{
+    font-size:34px !important;
+    font-weight:800 !important;
+    color:#67e8f9 !important;
+    margin-top:28px !important;
+    margin-bottom:12px !important;
+}
+
+/* Sub headers */
+h3{
+    font-size:24px !important;
+    font-weight:700 !important;
+    color:#ffffff !important;
+}
+
+/* Text */
+p, li, div, label{
+    font-size:18px !important;
+    color:#eef7ff;
+}
+
+/* KPI Cards */
+[data-testid="metric-container"]{
+    background: rgba(255,255,255,.06);
+    border:1px solid rgba(0,255,255,.28);
+    border-radius:20px;
+    padding:22px;
+    box-shadow:0 0 18px rgba(0,255,255,.10);
+}
+
+/* KPI Label */
+[data-testid="metric-container"] label{
+    font-size:16px !important;
+    color:#bdefff !important;
+}
+
+/* KPI Number */
+[data-testid="metric-container"] [data-testid="stMetricValue"]{
+    font-size:48px !important;
+    font-weight:900 !important;
+    color:white !important;
+}
+
+/* Buttons */
+.stButton>button{
+    background: linear-gradient(90deg,#00d4ff,#00ffa3);
+    color:#001018;
+    font-weight:800;
+    border:none;
+    border-radius:14px;
+    padding:.7rem 1.4rem;
+    box-shadow:0 0 18px rgba(0,255,255,.18);
+}
+
+.stButton>button:hover{
+    transform:translateY(-2px);
+}
+
+/* Inputs */
+textarea, input{
+    background:rgba(255,255,255,.06) !important;
+    color:white !important;
+    border-radius:12px !important;
+}
+
+/* Charts */
+.plotly-graph-div{
+    border-radius:18px;
+    overflow:hidden;
+}
+
+</style>
+""", unsafe_allow_html=True)
 st.set_page_config(
     page_title="Tumblr Growth Intelligence",
     page_icon="📈",
@@ -546,8 +653,3 @@ elif page == "Consulting Summary":
 - Stronger creator confidence
 """)
 
-    st.header("Presentation Tip")
-    st.write(
-        "Use the Strategic Post Simulator live during presentation to impress professors "
-        "with interactivity and practical business application."
-    )
