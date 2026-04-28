@@ -16,7 +16,7 @@ st.set_page_config(
 )
 
 # ---------------------------------------------------
-# PREMIUM GLASSMORPHISM UI
+# FINAL FUTURISTIC GLASS UI
 # ---------------------------------------------------
 st.markdown("""
 <style>
@@ -24,24 +24,24 @@ st.markdown("""
 /* ---------- APP BACKGROUND ---------- */
 .stApp {
     background:
-        radial-gradient(circle at top left, rgba(0, 183, 181, 0.35), transparent 34%),
-        radial-gradient(circle at bottom right, rgba(124, 58, 237, 0.32), transparent 36%),
-        linear-gradient(135deg, #020617 0%, #071426 48%, #1b1236 100%);
-    color: #e5faff;
+        radial-gradient(circle at top left, rgba(0, 183, 181, 0.28), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(124, 58, 237, 0.28), transparent 35%),
+        linear-gradient(135deg, #020817 0%, #071426 46%, #171036 100%);
+    color: #eafcff;
 }
 
 /* ---------- MAIN CONTAINER ---------- */
 .block-container {
-    padding-top: 2.2rem;
+    padding-top: 2rem;
     padding-bottom: 3rem;
-    padding-left: 2.4rem;
-    padding-right: 2.4rem;
+    padding-left: 2.2rem;
+    padding-right: 2.2rem;
     max-width: 1500px;
 }
 
 /* ---------- SIDEBAR ---------- */
 section[data-testid="stSidebar"] {
-    background: rgba(2, 6, 23, 0.86);
+    background: rgba(2, 6, 23, 0.90);
     backdrop-filter: blur(18px);
     border-right: 1px solid rgba(0, 183, 181, 0.25);
 }
@@ -51,39 +51,39 @@ section[data-testid="stSidebar"] * {
 }
 
 section[data-testid="stSidebar"] h1 {
-    font-size: 26px !important;
-    line-height: 1.18 !important;
+    font-size: 25px !important;
+    line-height: 1.15 !important;
     font-weight: 900 !important;
     color: #ffffff !important;
-    text-shadow: 0 0 18px rgba(103, 232, 249, 0.25);
+    text-shadow: 0 0 18px rgba(103, 232, 249, 0.22);
 }
 
 section[data-testid="stSidebar"] .stRadio label {
-    font-size: 16px !important;
+    font-size: 15.5px !important;
     font-weight: 700 !important;
 }
 
 /* ---------- PAGE TITLES ---------- */
 .page-title {
-    font-size: 64px !important;
+    font-size: 52px !important;
     font-weight: 950 !important;
     color: #ffffff !important;
     margin-top: 0 !important;
-    margin-bottom: 10px !important;
-    line-height: 1.03 !important;
-    letter-spacing: -1.4px !important;
-    text-shadow: 0 0 24px rgba(103, 232, 249, 0.22);
+    margin-bottom: 8px !important;
+    line-height: 1.04 !important;
+    letter-spacing: -1px !important;
+    text-shadow: 0 0 22px rgba(103, 232, 249, 0.20);
 }
 
 .page-subtitle {
-    font-size: 22px !important;
+    font-size: 19px !important;
     color: #cdefff !important;
-    margin-bottom: 30px !important;
-    line-height: 1.55 !important;
+    margin-bottom: 24px !important;
+    line-height: 1.5 !important;
     font-weight: 600 !important;
 }
 
-/* ---------- HEADINGS ---------- */
+/* ---------- GENERAL TYPOGRAPHY ---------- */
 h1, h2, h3 {
     color: #e5faff !important;
     font-weight: 850 !important;
@@ -91,18 +91,53 @@ h1, h2, h3 {
 
 h2 {
     color: #67e8f9 !important;
-    font-size: 34px !important;
-    margin-top: 28px !important;
+    font-size: 27px !important;
+    margin-top: 18px !important;
 }
 
 h3 {
     color: #ffffff !important;
-    font-size: 24px !important;
+    font-size: 21px !important;
 }
 
 p, li, label, span {
     color: #d9faff !important;
-    font-size: 17px;
+    font-size: 16px;
+    line-height: 1.55;
+}
+
+/* ---------- GLASS CARDS ---------- */
+.glass-card {
+    background: rgba(255, 255, 255, 0.075);
+    border: 1px solid rgba(0, 183, 181, 0.28);
+    border-radius: 22px;
+    padding: 24px 26px;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.24), 0 0 22px rgba(0,183,181,0.08);
+    backdrop-filter: blur(18px);
+    margin-bottom: 18px;
+}
+
+.glass-card h2, .glass-card h3 {
+    margin-top: 0 !important;
+}
+
+.glass-card p, .glass-card li {
+    color: #e3fbff !important;
+    font-size: 16px !important;
+}
+
+.insight-card {
+    background: rgba(103, 232, 249, 0.12);
+    border-left: 5px solid #67e8f9;
+    border-radius: 18px;
+    padding: 18px 22px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.20);
+    margin-top: 12px;
+    margin-bottom: 18px;
+}
+
+.insight-card b {
+    color: #ffffff !important;
 }
 
 /* ---------- METRICS ---------- */
@@ -110,15 +145,15 @@ div[data-testid="stMetric"] {
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(0, 183, 181, 0.35);
     border-radius: 22px;
-    padding: 24px 24px;
-    box-shadow: 0 0 25px rgba(0, 183, 181, 0.15);
+    padding: 22px 22px;
+    box-shadow: 0 0 25px rgba(0, 183, 181, 0.13);
     backdrop-filter: blur(18px);
-    min-height: 142px;
+    min-height: 132px;
 }
 
 div[data-testid="stMetricValue"] {
     color: #dffcff !important;
-    font-size: 2.65rem !important;
+    font-size: 2.35rem !important;
     font-weight: 950 !important;
     line-height: 1.05 !important;
 }
@@ -146,10 +181,10 @@ div[data-testid="stMetricLabel"] {
     color: white !important;
     border: none;
     border-radius: 14px;
-    padding: 12px 26px;
-    font-size: 17px;
+    padding: 11px 25px;
+    font-size: 16px;
     font-weight: 850;
-    box-shadow: 0 0 20px rgba(0,183,181,0.35);
+    box-shadow: 0 0 20px rgba(0,183,181,0.32);
 }
 
 .stButton > button:hover {
@@ -179,7 +214,7 @@ div[data-testid="stDataFrame"] {
 
 /* ---------- PLOTLY CHARTS ---------- */
 .js-plotly-plot {
-    background: rgba(255,255,255,0.08) !important;
+    background: rgba(255,255,255,0.075) !important;
     border-radius: 20px;
     padding: 10px;
     border: 1px solid rgba(0,183,181,0.25);
@@ -190,8 +225,8 @@ div[data-testid="stDataFrame"] {
 hr {
     border: none;
     height: 1px;
-    background: rgba(255,255,255,0.18);
-    margin: 2.2rem 0;
+    background: rgba(255,255,255,0.16);
+    margin: 2rem 0;
 }
 
 </style>
@@ -242,8 +277,8 @@ def dark_chart(fig, height=450):
         template="plotly_dark",
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(0,0,0,0)",
-        font=dict(color="#e5faff", size=14),
-        title_font=dict(color="#67e8f9", size=21),
+        font=dict(color="#e5faff", size=13),
+        title_font=dict(color="#67e8f9", size=20),
         height=height,
         margin=dict(l=50, r=35, t=70, b=55)
     )
@@ -254,6 +289,17 @@ def page_header(title, subtitle):
     st.markdown(f'<div class="page-title">{title}</div>', unsafe_allow_html=True)
     st.markdown(f'<div class="page-subtitle">{subtitle}</div>', unsafe_allow_html=True)
 
+
+def glass_start():
+    st.markdown('<div class="glass-card">', unsafe_allow_html=True)
+
+
+def glass_end():
+    st.markdown('</div>', unsafe_allow_html=True)
+
+
+def insight(text):
+    st.markdown(f'<div class="insight-card">{text}</div>', unsafe_allow_html=True)
 
 # ---------------------------------------------------
 # SIDEBAR
@@ -297,6 +343,7 @@ if page == "Executive Overview":
     col1, col2 = st.columns(2)
 
     with col1:
+        glass_start()
         st.header("Business Problem")
         st.write("Creators often publish music content without knowing:")
         st.markdown("""
@@ -306,8 +353,10 @@ if page == "Executive Overview":
 - What emotional tone works best  
 - How to grow consistently
 """)
+        glass_end()
 
     with col2:
+        glass_start()
         st.header("Delivered Solution")
         st.write("This platform provides:")
         st.markdown("""
@@ -317,6 +366,7 @@ if page == "Executive Overview":
 - Growth playbook recommendations  
 - Business-focused consulting summary
 """)
+        glass_end()
 
 # ---------------------------------------------------
 # ANALYTICS DASHBOARD
@@ -350,10 +400,10 @@ elif page == "Analytics Dashboard":
         )
         st.plotly_chart(dark_chart(fig), use_container_width=True)
 
-        st.success("""
-**What this tells us:**  
-This graph shows the average number of notes by posting hour.  
-The taller the bar, the stronger that hour performed historically.  
+        insight("""
+<b>What this tells us:</b><br>
+This graph shows the average number of notes by posting hour.<br>
+The taller the bar, the stronger that hour performed historically.<br>
 Creators should test top-performing hours first.
 """)
 
@@ -379,10 +429,10 @@ Creators should test top-performing hours first.
         fig.update_traces(line=dict(width=5), marker=dict(size=12))
         st.plotly_chart(dark_chart(fig), use_container_width=True)
 
-        st.success("""
-**What this tells us:**  
-Posts with too few tags underperform.  
-Balanced tag usage increases discoverability.  
+        insight("""
+<b>What this tells us:</b><br>
+Posts with too few tags underperform.<br>
+Balanced tag usage increases discoverability.<br>
 Very high tag usage can work if highly relevant.
 """)
 
@@ -408,10 +458,10 @@ Very high tag usage can work if highly relevant.
         )
         st.plotly_chart(dark_chart(fig), use_container_width=True)
 
-        st.success("""
-**What this tells us:**  
-Medium-length captions tend to perform strongest.  
-Too short feels empty.  
+        insight("""
+<b>What this tells us:</b><br>
+Medium-length captions tend to perform strongest.<br>
+Too short feels empty.<br>
 Too long may reduce reading completion.
 """)
 
@@ -433,10 +483,10 @@ Too long may reduce reading completion.
             )
             st.plotly_chart(dark_chart(fig), use_container_width=True)
 
-            st.success("""
-**What this tells us:**  
-Each bubble is a content style group.  
-Bigger bubbles mean more posts.  
+            insight("""
+<b>What this tells us:</b><br>
+Each bubble is a content style group.<br>
+Bigger bubbles mean more posts.<br>
 Higher bubbles mean stronger average engagement.
 """)
         else:
@@ -470,6 +520,7 @@ elif page == "Strategic Post Simulator":
         run = st.button("Analyze Post")
 
     with right:
+        glass_start()
         st.subheader("How the Simulator Works")
         st.write("The simulator estimates whether a Tumblr post has high engagement potential.")
         st.markdown("""
@@ -487,6 +538,7 @@ It evaluates:
             "The output is not a guarantee of virality. "
             "It is a decision-support score based on historical posting patterns."
         )
+        glass_end()
 
     if run:
         if caption.strip() == "":
@@ -517,6 +569,7 @@ It evaluates:
             ))
             st.plotly_chart(dark_chart(fig, height=420), use_container_width=True)
 
+            glass_start()
             st.subheader("Recommendations")
             if len(caption.split()) < 50:
                 st.write("- Add more storytelling or emotional context.")
@@ -532,6 +585,7 @@ It evaluates:
                 st.write("- Test stronger posting windows such as 3:00, 11:00, 13:00, 14:00, or 23:00.")
             else:
                 st.write("- Posting hour aligns with stronger historical windows.")
+            glass_end()
 
 # ---------------------------------------------------
 # GROWTH PLAYBOOK
@@ -546,6 +600,7 @@ elif page == "Growth Playbook":
     ideal_words = round(df[df["high_engagement"] == 1]["word_count"].mean(), 0)
     ideal_tags = round(df[df["high_engagement"] == 1]["tag_count"].mean(), 0)
 
+    glass_start()
     st.header("Recommended Creator Strategy")
 
     st.subheader("1. Caption Strategy")
@@ -584,8 +639,7 @@ elif page == "Growth Playbook":
         "Post 3–5 times per week, track notes, compare tags, "
         "test different hours, and reuse formats that perform well."
     )
-
-    st.markdown("##")
+    glass_end()
 
     playbook = pd.DataFrame({
         "Growth Lever": ["Caption", "Tags", "Timing", "Emotion", "Consistency"],
@@ -616,6 +670,7 @@ elif page == "Consulting Summary":
         "Business-facing summary of platform value and impact."
     )
 
+    glass_start()
     st.header("Project Overview")
     st.write(
         "This project follows Track 2: User / Influencer / Brand-Facing Analytics. "
@@ -663,3 +718,4 @@ elif page == "Consulting Summary":
 - More consistent audience growth  
 - Stronger creator confidence
 """)
+    glass_end()
